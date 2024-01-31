@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase xmlns:con="http://eviware.com/soapui/config" id="fb98df04-7cdb-4f6e-a53b-76832ef6e9e1" discardOkResults="false" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="CreateReasons" searchProperties="true" timeout="0" zephyrTestName="WES-1657" zephyrTestId="37199">
+  <con:settings id="f462d690-9add-4e9a-a2b3-f9c87f6372d8">
+    <con:setting id="fb98df04-7cdb-4f6e-a53b-76832ef6e9e1fileName">CreateReasons</con:setting>
+  </con:settings>
+  <con:testStep type="datasource" name="ReasonTestData" id="e372af48-1438-49c3-9ef7-2b6739a9b6aa">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="con:DataSourceStep">
+      <con:dataSource type="Data Generator">
+        <con:configuration>
+          <generatedDataCount>10</generatedDataCount>
+          <generatorsTotalNumber>1</generatorsTotalNumber>
+          <lastSelectedProperty>0</lastSelectedProperty>
+          <GeneratorType0>STR</GeneratorType0>
+          <PropertyName0>TestData_Reasons</PropertyName0>
+          <repetitionCountTestData_Reasons>0</repetitionCountTestData_Reasons>
+          <repeatValuesTestData_Reasons>false</repeatValuesTestData_Reasons>
+          <PasswordDataGeneratorUseSpacesTestData_Reasons>false</PasswordDataGeneratorUseSpacesTestData_Reasons>
+          <PasswordDataGeneratorUsePunctuationMarksTestData_Reasons>false</PasswordDataGeneratorUsePunctuationMarksTestData_Reasons>
+          <PasswordDataGeneratorUseLettersTestData_Reasons>true</PasswordDataGeneratorUseLettersTestData_Reasons>
+          <PasswordDataGeneratorUseDigitsTestData_Reasons>false</PasswordDataGeneratorUseDigitsTestData_Reasons>
+          <PasswordDataGeneratorMaxCharacterCountTestData_Reasons>7</PasswordDataGeneratorMaxCharacterCountTestData_Reasons>
+          <PasswordDataGeneratorMinCharacterCountTestData_Reasons>5</PasswordDataGeneratorMinCharacterCountTestData_Reasons>
+          <escapeSpaceSequence/>
+        </con:configuration>
+      </con:dataSource>
+      <con:shared>true</con:shared>
+      <con:restartShared>true</con:restartShared>
+      <con:property>TestData_Reasons</con:property>
+      <con:restartOnRun>true</con:restartOnRun>
+      <con:stopDatasourceExhausted>false</con:stopDatasourceExhausted>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="CreateReason" id="7b684f5c-3680-44d7-9bcb-443514872d1f">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="ConfigurationService" resourcePath="/v1/reasons" methodName="createReason" xsi:type="con:RestRequestStep">
+      <con:restRequest name="CreateReason" id="f593120d-31c6-4b97-890e-22c4b7fcd8da" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>http://wes-qa.kpiopto.com:53135/configuration</con:endpoint>
+        <con:request>{
+      "reasonId": 0,
+      "type": "Type_${ReasonTestData#TestData_Reasons}",
+      "subType": "SubT_${ReasonTestData#TestData_Reasons}",
+      "reason": "Reason_${ReasonTestData#TestData_Reasons}",
+      "description": "AutomaticInventory_${ReasonTestData#TestData_Reasons}",
+      "isEnabled": true,
+      "defaultReason": true,
+      "created": "${#Global#currentDate}",
+      "createdBy": "${#Global#createdBy}",
+      "modified": "",
+      "modifiedBy": null
+    }</con:request>
+        <con:originalUri>http://wes-qa.kpiopto.com/configuration/v1/reasons</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="803c8119-5944-4208-97cc-4033bee64026" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>${#Global#postStatusCode}</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="509b683f-93e2-46c0-91d2-ae08a90627fa" name="Response SLA">
+          <con:configuration>
+            <SLA>${#Global#responseTime}</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+        <con:environmentSpec>
+          <con:entry environmentId="a20232c5-d77a-444c-bda6-0af2d2764555">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+          <con:entry environmentId="5b92f166-e4e5-44b8-92cd-0680c6ad2036">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+          <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+          <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+        </con:environmentSpec>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="datasource" name="VerifyCreatedReasonDetails" id="6581fcd5-fd42-4cfb-8baf-9d983442b335">
+    <con:settings>
+      <con:setting id="com.eviware.soapui.impl.wsdl.teststeps.datasource.DataSourceContainer@prepared-properties">&lt;entry key="id" value="${CreateReason#Response#$['id']}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+    </con:settings>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="con:DataSourceStep">
+      <con:dataSource type="JDBC">
+        <con:configuration>
+          <driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+          <connstr>jdbc:sqlserver://20.109.106.76:1433;databaseName=configuration;user=dbuser;password=PASS_VALUE</connstr>
+          <pass>LetDb1n2023!</pass>
+          <Connection/>
+          <query>Select dbo.Reason.Description As dbo_Reason_Description, dbo.Reason.SubType As
+  dbo_Reason_SubType, dbo.Reason.ReasonId As dbo_Reason_ReasonId,
+  dbo.Reason.Reason As dbo_Reason_Reason, dbo.Reason.Modified As
+  dbo_Reason_Modified, dbo.Reason.DefaultReason As dbo_Reason_DefaultReason,
+  dbo.Reason.IsEnabled As dbo_Reason_IsEnabled, dbo.Reason.CreatedBy As
+  dbo_Reason_CreatedBy, dbo.Reason.ModifiedBy As dbo_Reason_ModifiedBy,
+  dbo.Reason.Created As dbo_Reason_Created, dbo.Reason.Type As dbo_Reason_Type
+From dbo.Reason where dbo.Reason.ReasonId=:id</query>
+          <fetchSize/>
+          <stored-procedure>false</stored-procedure>
+        </con:configuration>
+      </con:dataSource>
+      <con:shared>true</con:shared>
+      <con:restartShared>true</con:restartShared>
+      <con:property>dbo_Reason_Description</con:property>
+      <con:property>dbo_Reason_SubType</con:property>
+      <con:property>dbo_Reason_ReasonId</con:property>
+      <con:property>dbo_Reason_Reason</con:property>
+      <con:property>dbo_Reason_Modified</con:property>
+      <con:property>dbo_Reason_DefaultReason</con:property>
+      <con:property>dbo_Reason_IsEnabled</con:property>
+      <con:property>dbo_Reason_CreatedBy</con:property>
+      <con:property>dbo_Reason_ModifiedBy</con:property>
+      <con:property>dbo_Reason_Created</con:property>
+      <con:property>dbo_Reason_Type</con:property>
+      <con:restartOnRun>true</con:restartOnRun>
+      <con:stopDatasourceExhausted>false</con:stopDatasourceExhausted>
+    </con:config>
+  </con:testStep>
+  <con:properties/>
+  <con:reportParameters/>
+  <con:environmentSpec>
+    <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+    <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+  </con:environmentSpec>
+</con:testCase>

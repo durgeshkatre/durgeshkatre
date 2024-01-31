@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testSuite xmlns:con="http://eviware.com/soapui/config" id="80fc84d5-a006-4f33-892c-7fe020bf9c0a" name="Reasons_200Series">
+  <con:settings id="a7581526-b56e-468c-867a-1f928d7d1b58">
+    <con:setting id="80fc84d5-a006-4f33-892c-7fe020bf9c0afileName">Reasons_200Series</con:setting>
+  </con:settings>
+  <con:runType>SEQUENTIAL</con:runType>
+  <con:properties/>
+  <con:reportParameters/>
+  <con:environmentSpec>
+    <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+    <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+  </con:environmentSpec>
+</con:testSuite>

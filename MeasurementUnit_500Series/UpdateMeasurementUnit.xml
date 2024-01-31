@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase xmlns:con="http://eviware.com/soapui/config" id="c1167414-670d-404f-8ec4-62cc39237f03" discardOkResults="false" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="UpdateMeasurementUnit" searchProperties="true" timeout="0" zephyrTestName="WES-1627" zephyrTestId="37169">
+  <con:settings id="4ccd7a68-7188-473e-8a47-964062fc3b43">
+    <con:setting id="c1167414-670d-404f-8ec4-62cc39237f03fileName">UpdateMeasurementUnit</con:setting>
+  </con:settings>
+  <con:testStep type="restrequest" name="UpdateMeasurementUnit" id="8d288047-c8ee-4ea6-b56e-a7aa4b9fca83">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="ConfigurationService" resourcePath="/v1/measurement-units/{measurementUnitId}" methodName="updateMeasurementUnit" xsi:type="con:RestRequestStep">
+      <con:restRequest name="UpdateMeasurementUnit" id="2bd5517e-1874-45f9-8a8c-cda460b6a63a" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>http://wes-qa.kpiopto.com:53135/configuration</con:endpoint>
+        <con:request>{\r
+  "measurementUnitId" : ${#[MeasurementUnit_200Series#CreateMeasurementUnit#CreateMeasurement]#Response#$['id']},\r
+  "unitName" : "${#[MeasurementUnit_200Series#CreateMeasurementUnit#CreateMeasurement]#RawRequest#$['unitName']}_Test",\r
+  "unitAbbreviation" : "${#[MeasurementUnit_200Series#CreateMeasurementUnit#CreateMeasurement]#RawRequest#$['unitAbbreviation']}",\r
+  "unitSymbol" : "${#[MeasurementUnit_200Series#CreateMeasurementUnit#CreateMeasurement]#RawRequest#$['unitSymbol']}"\r
+}</con:request>
+        <con:originalUri>http://wes-qa.kpiopto.com/configuration/v1/measurement-units/294</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="b5b18cdb-002e-48e8-bda6-455cc6c5f678" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>${#Global#updateStatusCode}</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="c19d0620-0ced-46ee-ad7b-112473b99d77" name="Response SLA">
+          <con:configuration>
+            <SLA>${#Global#responseTime}</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="measurementUnitId" value="${#[MeasurementUnit_200Series#CreateMeasurementUnit#CreateMeasurement]#Response#$['id']}"/>
+        </con:parameters>
+        <con:environmentSpec>
+          <con:entry environmentId="a20232c5-d77a-444c-bda6-0af2d2764555">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+          <con:entry environmentId="5b92f166-e4e5-44b8-92cd-0680c6ad2036">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+          <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+          <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+        </con:environmentSpec>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="datasource" name="VerifyUpdatedMeasurementUnitDetails" id="9d227694-201c-423c-a496-4727fdb937cb">
+    <con:settings>
+      <con:setting id="com.eviware.soapui.impl.wsdl.teststeps.datasource.DataSourceContainer@prepared-properties">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="unitName" value="${UpdateMeasurementUnit#RawRequest#$['unitName']}"/>
+  &lt;con:entry key="id" value="${#[MeasurementUnit_200Series#CreateMeasurementUnit#CreateMeasurement]#Response#$['id']}"/>
+&lt;/xml-fragment></con:setting>
+    </con:settings>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="con:DataSourceStep">
+      <con:dataSource type="JDBC">
+        <con:configuration>
+          <driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+          <connstr>jdbc:sqlserver://20.109.106.76:1433;databaseName=configuration;user=dbuser;password=PASS_VALUE</connstr>
+          <pass>LetDb1n2023!</pass>
+          <Connection/>
+          <query>Select dbo.measurementunit.MeasurementUnitId As
+  dbo_measurementunit_MeasurementUnitId, dbo.measurementunit.UnitName As
+  dbo_measurementunit_UnitName, dbo.measurementunit.UnitAbbreviation As
+  dbo_measurementunit_UnitAbbreviation, dbo.measurementunit.UnitSymbol
+  As dbo_measurementunit_UnitSymbol
+From dbo.measurementunit
+Where dbo.measurementunit.MeasurementUnitId = :id and dbo.measurementunit.UnitName=:unitName</query>
+          <fetchSize/>
+          <stored-procedure>false</stored-procedure>
+        </con:configuration>
+      </con:dataSource>
+      <con:shared>true</con:shared>
+      <con:restartShared>true</con:restartShared>
+      <con:property>dbo_measurementunit_MeasurementUnitId</con:property>
+      <con:property>dbo_measurementunit_UnitName</con:property>
+      <con:property>dbo_measurementunit_UnitAbbreviation</con:property>
+      <con:property>dbo_measurementunit_UnitSymbol</con:property>
+      <con:restartOnRun>true</con:restartOnRun>
+      <con:stopDatasourceExhausted>false</con:stopDatasourceExhausted>
+    </con:config>
+  </con:testStep>
+  <con:properties/>
+  <con:reportParameters/>
+  <con:environmentSpec>
+    <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+    <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+  </con:environmentSpec>
+</con:testCase>

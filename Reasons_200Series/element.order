@@ -1,0 +1,8 @@
+CreateReasons.xml
+UpdateReasons.xml
+GetReasonDetails.xml
+GetReasonByReason.xml
+GetReasonById.xml
+GetReasonByType.xml
+GetReasonByType%26SubType.xml
+DeleteReasonDetails.xml

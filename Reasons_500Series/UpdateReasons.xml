@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase xmlns:con="http://eviware.com/soapui/config" id="25c8169a-da42-40f6-8baf-39a459ad36d1" discardOkResults="false" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="UpdateReasons" searchProperties="true" timeout="0" zephyrTestName="WES-1654" zephyrTestId="37196">
+  <con:settings id="cedb2a30-4e8c-4cd8-bd07-0fe1f278afeb">
+    <con:setting id="25c8169a-da42-40f6-8baf-39a459ad36d1fileName">UpdateReasons</con:setting>
+  </con:settings>
+  <con:testStep type="restrequest" name="UpdateReasons" id="fd147a5d-c6b7-4489-93c9-806b27cd9940">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="ConfigurationService" resourcePath="/v1/reasons/{reasonId}" methodName="updateReason" xsi:type="con:RestRequestStep">
+      <con:restRequest name="UpdateReasons" id="b38824f2-7ae2-40b4-8679-03d6f1c9cddd" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>http://wes-qa.kpiopto.com:53135/configuration</con:endpoint>
+        <con:request>{\r
+  "reasonId" : ${#[Reasons_200Series#CreateReasons#CreateReason]#Response#$['id']},\r
+  "type" : "${#[Reasons_200Series#CreateReasons#CreateReason]#RawRequest#$['type']}",\r
+  "subType" : "${#[Reasons_200Series#CreateReasons#CreateReason]#RawRequest#$['subType']}",\r
+  "reason" : "${#[Reasons_200Series#CreateReasons#CreateReason]#RawRequest#$['reason']}_Test",\r
+  "description" : "${#[Reasons_200Series#CreateReasons#CreateReason]#RawRequest#$['description']}",\r
+  "isEnabled" : false,\r
+  "defaultReason" : false,\r
+  "created" : "${#Global#currentDate}",\r
+  "createdBy" : "${#Global#createdBy}",\r
+  "modified" : "",\r
+  "modifiedBy" : ""
+}</con:request>
+        <con:originalUri>http://wes-qa.kpiopto.com/configuration/v1/reasons/282</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="605c9dba-581e-41a5-aa0e-d5e54cfd7b91" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>${#Global#updateStatusCode}</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="c174a66e-6146-4d31-8505-9812b3e97793" name="Response SLA">
+          <con:configuration>
+            <SLA>${#Global#responseTime}</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="reasonId" value="${#[Reasons_200Series#CreateReasons#CreateReason]#Response#$['id']}"/>
+        </con:parameters>
+        <con:environmentSpec>
+          <con:entry environmentId="a20232c5-d77a-444c-bda6-0af2d2764555">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+          <con:entry environmentId="5b92f166-e4e5-44b8-92cd-0680c6ad2036">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+          <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+          <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+        </con:environmentSpec>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="datasource" name="VerifyUpdatedReasonDetails" id="11322464-fd79-4357-ba99-2aec551c3230">
+    <con:settings>
+      <con:setting id="com.eviware.soapui.impl.wsdl.teststeps.datasource.DataSourceContainer@prepared-properties">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="reason" value="${UpdateReasons#RawRequest#$['reason']}"/>
+  &lt;con:entry key="id" value=" ${#[Reasons_200Series#CreateReasons#CreateReason]#Response#$['id']}"/>
+&lt;/xml-fragment></con:setting>
+    </con:settings>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="con:DataSourceStep">
+      <con:dataSource type="JDBC">
+        <con:configuration>
+          <driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+          <connstr>jdbc:sqlserver://20.109.106.76:1433;databaseName=configuration;user=dbuser;password=PASS_VALUE</connstr>
+          <pass>LetDb1n2023!</pass>
+          <Connection/>
+          <query>Select dbo.Reason.Description As dbo_Reason_Description, dbo.Reason.SubType As
+  dbo_Reason_SubType, dbo.Reason.ReasonId As dbo_Reason_ReasonId,
+  dbo.Reason.Reason As dbo_Reason_Reason, dbo.Reason.Modified As
+  dbo_Reason_Modified, dbo.Reason.DefaultReason As dbo_Reason_DefaultReason,
+  dbo.Reason.IsEnabled As dbo_Reason_IsEnabled, dbo.Reason.CreatedBy As
+  dbo_Reason_CreatedBy, dbo.Reason.ModifiedBy As dbo_Reason_ModifiedBy,
+  dbo.Reason.Created As dbo_Reason_Created, dbo.Reason.Type As dbo_Reason_Type
+From dbo.Reason where dbo.Reason.ReasonId=:id and  dbo.Reason.Reason=:reason and dbo.Reason.IsEnabled='false'
+and dbo.Reason.DefaultReason='false'</query>
+          <fetchSize/>
+          <stored-procedure>false</stored-procedure>
+        </con:configuration>
+      </con:dataSource>
+      <con:shared>true</con:shared>
+      <con:restartShared>true</con:restartShared>
+      <con:property>dbo_Reason_Description</con:property>
+      <con:property>dbo_Reason_SubType</con:property>
+      <con:property>dbo_Reason_ReasonId</con:property>
+      <con:property>dbo_Reason_Reason</con:property>
+      <con:property>dbo_Reason_Modified</con:property>
+      <con:property>dbo_Reason_DefaultReason</con:property>
+      <con:property>dbo_Reason_IsEnabled</con:property>
+      <con:property>dbo_Reason_CreatedBy</con:property>
+      <con:property>dbo_Reason_ModifiedBy</con:property>
+      <con:property>dbo_Reason_Created</con:property>
+      <con:property>dbo_Reason_Type</con:property>
+      <con:restartOnRun>true</con:restartOnRun>
+      <con:stopDatasourceExhausted>false</con:stopDatasourceExhausted>
+    </con:config>
+  </con:testStep>
+  <con:properties/>
+  <con:reportParameters/>
+  <con:environmentSpec>
+    <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+    <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+  </con:environmentSpec>
+</con:testCase>

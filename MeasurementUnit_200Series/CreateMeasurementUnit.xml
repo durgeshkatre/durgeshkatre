@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase xmlns:con="http://eviware.com/soapui/config" id="800d8729-f2f8-424e-bfc4-20d21d952d8c" discardOkResults="false" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="CreateMeasurementUnit" searchProperties="true" timeout="0" zephyrTestName="WES-1630" zephyrTestId="37172">
+  <con:settings id="a7866faa-1f3f-4f78-93aa-9c13c345223e">
+    <con:setting id="800d8729-f2f8-424e-bfc4-20d21d952d8cfileName">CreateMeasurementUnit</con:setting>
+  </con:settings>
+  <con:testStep type="datasource" name="MeasurementSymbol" id="ebdae58b-fcf9-4426-89d0-bde57ae0319c">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="con:DataSourceStep">
+      <con:dataSource type="Data Generator">
+        <con:configuration>
+          <generatedDataCount>10</generatedDataCount>
+          <generatorsTotalNumber>1</generatorsTotalNumber>
+          <lastSelectedProperty>0</lastSelectedProperty>
+          <GeneratorType0>STR</GeneratorType0>
+          <PropertyName0>symbol</PropertyName0>
+          <repetitionCountsymbol>0</repetitionCountsymbol>
+          <repeatValuessymbol>false</repeatValuessymbol>
+          <PasswordDataGeneratorUseSpacessymbol>false</PasswordDataGeneratorUseSpacessymbol>
+          <PasswordDataGeneratorUsePunctuationMarkssymbol>false</PasswordDataGeneratorUsePunctuationMarkssymbol>
+          <PasswordDataGeneratorUseLetterssymbol>true</PasswordDataGeneratorUseLetterssymbol>
+          <PasswordDataGeneratorUseDigitssymbol>false</PasswordDataGeneratorUseDigitssymbol>
+          <PasswordDataGeneratorMaxCharacterCountsymbol>7</PasswordDataGeneratorMaxCharacterCountsymbol>
+          <PasswordDataGeneratorMinCharacterCountsymbol>5</PasswordDataGeneratorMinCharacterCountsymbol>
+          <escapeSpaceSequence/>
+        </con:configuration>
+      </con:dataSource>
+      <con:shared>true</con:shared>
+      <con:restartShared>true</con:restartShared>
+      <con:property>symbol</con:property>
+      <con:restartOnRun>true</con:restartOnRun>
+      <con:stopDatasourceExhausted>false</con:stopDatasourceExhausted>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="CreateMeasurement" id="9e17c712-a29c-424f-be1a-c94dc0b05664">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="ConfigurationService" resourcePath="/v1/measurement-units" methodName="createMeasurementUnit" xsi:type="con:RestRequestStep">
+      <con:restRequest name="CreateMeasurement" id="d4a62630-dfe0-4570-9f0e-66dce639cd63" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>http://wes-qa.kpiopto.com:53135/configuration</con:endpoint>
+        <con:request>{\r
+  "measurementUnitId" : 0,\r
+  "unitName" : "unit_${#Global#date}",\r
+  "unitAbbreviation" : "UA_${#Global#date}",
+  "unitSymbol" : "US_${MeasurementSymbol#symbol}"\r
+}</con:request>
+        <con:originalUri>http://wes-qa.kpiopto.com/configuration/v1/measurement-units</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="0f5ce380-b4fd-47bb-ab81-c34609f931c5" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>${#Global#postStatusCode}</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="ef89223e-39a9-45d1-a86c-632d53bd8118" name="Response SLA">
+          <con:configuration>
+            <SLA>${#Global#responseTime}</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+        <con:environmentSpec>
+          <con:entry environmentId="a20232c5-d77a-444c-bda6-0af2d2764555">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+          <con:entry environmentId="5b92f166-e4e5-44b8-92cd-0680c6ad2036">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+          <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+          <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+        </con:environmentSpec>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="datasource" name="VerifyCreatedMeasurementUnitDetails" id="974e6957-d0b5-46ab-bfa7-f9af537ecbf5">
+    <con:settings>
+      <con:setting id="com.eviware.soapui.impl.wsdl.teststeps.datasource.DataSourceContainer@prepared-properties">&lt;entry key="id" value="${CreateMeasurement#Response#$['id']}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+    </con:settings>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="con:DataSourceStep">
+      <con:dataSource type="JDBC">
+        <con:configuration>
+          <driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+          <connstr>jdbc:sqlserver://20.109.106.76:1433;databaseName=configuration;user=dbuser;password=PASS_VALUE</connstr>
+          <pass>LetDb1n2023!</pass>
+          <Connection>WES-Configuration-Service( WES-QA-Environment )</Connection>
+          <query>Select dbo.measurementunit.MeasurementUnitId As
+  dbo_measurementunit_MeasurementUnitId, dbo.measurementunit.UnitName As
+  dbo_measurementunit_UnitName, dbo.measurementunit.UnitAbbreviation As
+  dbo_measurementunit_UnitAbbreviation, dbo.measurementunit.UnitSymbol
+  As dbo_measurementunit_UnitSymbol
+From dbo.measurementunit
+Where dbo.measurementunit.MeasurementUnitId = :id</query>
+          <fetchSize/>
+          <stored-procedure>false</stored-procedure>
+        </con:configuration>
+      </con:dataSource>
+      <con:shared>true</con:shared>
+      <con:restartShared>true</con:restartShared>
+      <con:property>dbo_measurementunit_MeasurementUnitId</con:property>
+      <con:property>dbo_measurementunit_UnitName</con:property>
+      <con:property>dbo_measurementunit_UnitAbbreviation</con:property>
+      <con:property>dbo_measurementunit_UnitSymbol</con:property>
+      <con:restartOnRun>true</con:restartOnRun>
+      <con:stopDatasourceExhausted>false</con:stopDatasourceExhausted>
+    </con:config>
+  </con:testStep>
+  <con:properties/>
+  <con:reportParameters/>
+  <con:environmentSpec>
+    <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+    <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+  </con:environmentSpec>
+</con:testCase>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config" name="/v1/reasons/reason/{reason}" path="/v1/reasons/reason/{reason}" id="0a8dcff2-86f3-41df-8547-04f122abda0f">
+  <con:settings id="f1a9483c-6c42-4a70-87c5-e546d23952d3">
+    <con:setting id="0a8dcff2-86f3-41df-8547-04f122abda0ffileName">%2Fv1%2Freasons%2Freason%2F%7Breason%7D</con:setting>
+  </con:settings>
+  <con:parameters/>
+  <con:method name="getReasonByReason" id="457a7f6e-d2b0-433a-b3e1-4be18d49dc53" method="GET">
+    <con:description>Returns a single reason</con:description>
+    <con:settings/>
+    <con:parameters>
+      <con:parameter required="true">
+        <con:name>reason</con:name>
+        <con:style>TEMPLATE</con:style>
+        <con:description>reason of reason to be searched</con:description>
+      </con:parameter>
+    </con:parameters>
+    <con:representation type="RESPONSE">
+      <con:mediaType>application/json</con:mediaType>
+      <con:status>200</con:status>
+      <con:params/>
+      <con:description>Reason by reason searched</con:description>
+      <con:sampleContent>{
+  "reasonId" : 0,
+  "type" : "string",
+  "subType" : "string",
+  "reason" : "string",
+  "description" : "string",
+  "isEnabled" : true,
+  "defaultReason" : true,
+  "created" : "2015-07-20T15:49:04-07:00",
+  "createdBy" : "string",
+  "modified" : "2015-07-20T15:49:04-07:00",
+  "modifiedBy" : "string"
+}</con:sampleContent>
+    </con:representation>
+    <con:representation type="RESPONSE">
+      <con:mediaType>*/*</con:mediaType>
+      <con:status>400</con:status>
+      <con:params/>
+      <con:description>Invalid Request Message</con:description>
+    </con:representation>
+    <con:representation type="RESPONSE">
+      <con:mediaType>*/*</con:mediaType>
+      <con:status>500</con:status>
+      <con:params/>
+      <con:description>Internal Server Error</con:description>
+    </con:representation>
+    <con:request name="Request 1" id="eb2ffaad-a9a7-48df-a8e5-468efb98bb86" mediaType="application/json">
+      <con:settings/>
+      <con:endpoint>http://wes-qa.kpiopto.com:53135/configuration</con:endpoint>
+      <con:request/>
+      <con:credentials>
+        <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+      <con:parameters/>
+      <con:environmentSpec>
+        <con:entry environmentId="a20232c5-d77a-444c-bda6-0af2d2764555">
+          <con:authProfile>Inherit From Parent</con:authProfile>
+        </con:entry>
+        <con:entry environmentId="5b92f166-e4e5-44b8-92cd-0680c6ad2036">
+          <con:authProfile>Inherit From Parent</con:authProfile>
+        </con:entry>
+        <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+          <con:authProfile>Inherit From Parent</con:authProfile>
+        </con:entry>
+        <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+          <con:authProfile>Inherit From Parent</con:authProfile>
+        </con:entry>
+      </con:environmentSpec>
+    </con:request>
+    <con:environmentSpec>
+      <con:entry environmentId="a20232c5-d77a-444c-bda6-0af2d2764555">
+        <con:authProfile>Inherit From Parent</con:authProfile>
+      </con:entry>
+      <con:entry environmentId="5b92f166-e4e5-44b8-92cd-0680c6ad2036">
+        <con:authProfile>Inherit From Parent</con:authProfile>
+      </con:entry>
+      <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+        <con:authProfile>Inherit From Parent</con:authProfile>
+      </con:entry>
+      <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+        <con:authProfile>Inherit From Parent</con:authProfile>
+      </con:entry>
+    </con:environmentSpec>
+  </con:method>
+  <con:environmentSpec>
+    <con:entry environmentId="a20232c5-d77a-444c-bda6-0af2d2764555">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+    <con:entry environmentId="5b92f166-e4e5-44b8-92cd-0680c6ad2036">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+    <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+    <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+  </con:environmentSpec>
+</con:resource>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase xmlns:con="http://eviware.com/soapui/config" id="5fca95ad-e406-40cf-9d1d-35ab037f19a7" discardOkResults="false" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="DeleteMeasurementUnit" searchProperties="true" timeout="0" zephyrTestName="WES-1633" zephyrTestId="37175">
+  <con:settings id="fe7c3aa6-042b-4406-b1d6-c6734875aa3c">
+    <con:setting id="5fca95ad-e406-40cf-9d1d-35ab037f19a7fileName">DeleteMeasurementUnit</con:setting>
+  </con:settings>
+  <con:testStep type="restrequest" name="DeleteMeasurementUnit" id="04f7d2be-5580-4d6b-a51c-30f2bff21b7a">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="ConfigurationService" resourcePath="/v1/measurement-units/{measurementUnitId}" methodName="deleteMeasurementUnit" xsi:type="con:RestRequestStep">
+      <con:restRequest name="DeleteMeasurementUnit" id="4ccc45b6-3b92-433a-8548-eec5e3f8ad4c" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>http://wes-qa.kpiopto.com:53135/configuration</con:endpoint>
+        <con:request/>
+        <con:originalUri>http://wes-qa.kpiopto.com/configuration/v1/measurement-units/294</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="01d35163-0072-4625-888e-43a4d86d2eeb" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>${#Global#updateStatusCode}</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="69de7f6a-4149-4367-b03b-77ea64aa86b5" name="Response SLA">
+          <con:configuration>
+            <SLA>${#Global#responseTime}</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="measurementUnitId" value="${#[MeasurementUnit_200Series#CreateMeasurementUnit#CreateMeasurement]#Response#$['id']}"/>
+        </con:parameters>
+        <con:environmentSpec>
+          <con:entry environmentId="a20232c5-d77a-444c-bda6-0af2d2764555">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+          <con:entry environmentId="5b92f166-e4e5-44b8-92cd-0680c6ad2036">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+          <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+          <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+        </con:environmentSpec>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:properties/>
+  <con:reportParameters/>
+  <con:environmentSpec>
+    <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+    <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+  </con:environmentSpec>
+</con:testCase>

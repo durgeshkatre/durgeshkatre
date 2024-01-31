@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase xmlns:con="http://eviware.com/soapui/config" id="3d41d8b4-7a36-407a-a36a-65083ace2a7b" discardOkResults="false" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="CreateReasons" searchProperties="true" timeout="0" zephyrTestName="WES-1658" zephyrTestId="37200">
+  <con:settings id="68c9340c-edde-4af8-954f-2671f821a4d2">
+    <con:setting id="3d41d8b4-7a36-407a-a36a-65083ace2a7bfileName">CreateReasons</con:setting>
+  </con:settings>
+  <con:testStep type="datasource" name="VerifyBeforeCreatedReasonDetails" id="e3256996-65c1-40a4-a95c-dcda4e7aa23b">
+    <con:settings>
+      <con:setting id="com.eviware.soapui.impl.wsdl.teststeps.datasource.DataSourceContainer@prepared-properties">&lt;xml-fragment/></con:setting>
+    </con:settings>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="con:DataSourceStep">
+      <con:dataSource type="JDBC">
+        <con:configuration>
+          <driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+          <connstr>jdbc:sqlserver://20.109.106.76:1433;databaseName=configuration;user=dbuser;password=PASS_VALUE</connstr>
+          <pass>LetDb1n2023!</pass>
+          <Connection/>
+          <query>Select Count(Reason.ReasonId) As BeforePostCount
+From Reason</query>
+          <fetchSize/>
+          <stored-procedure>false</stored-procedure>
+        </con:configuration>
+      </con:dataSource>
+      <con:shared>true</con:shared>
+      <con:restartShared>true</con:restartShared>
+      <con:property>BeforePostCount</con:property>
+      <con:restartOnRun>true</con:restartOnRun>
+      <con:stopDatasourceExhausted>false</con:stopDatasourceExhausted>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="datasource" name="ReasonTestData" id="5e09e952-93f2-408c-9ab4-ae9bc08f6980">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="con:DataSourceStep">
+      <con:dataSource type="Data Generator">
+        <con:configuration>
+          <generatedDataCount>10</generatedDataCount>
+          <generatorsTotalNumber>1</generatorsTotalNumber>
+          <lastSelectedProperty>0</lastSelectedProperty>
+          <GeneratorType0>STR</GeneratorType0>
+          <PropertyName0>TestData_Reasons</PropertyName0>
+          <repetitionCountTestData_Reasons>0</repetitionCountTestData_Reasons>
+          <repeatValuesTestData_Reasons>false</repeatValuesTestData_Reasons>
+          <PasswordDataGeneratorUseSpacesTestData_Reasons>false</PasswordDataGeneratorUseSpacesTestData_Reasons>
+          <PasswordDataGeneratorUsePunctuationMarksTestData_Reasons>false</PasswordDataGeneratorUsePunctuationMarksTestData_Reasons>
+          <PasswordDataGeneratorUseLettersTestData_Reasons>true</PasswordDataGeneratorUseLettersTestData_Reasons>
+          <PasswordDataGeneratorUseDigitsTestData_Reasons>false</PasswordDataGeneratorUseDigitsTestData_Reasons>
+          <PasswordDataGeneratorMaxCharacterCountTestData_Reasons>7</PasswordDataGeneratorMaxCharacterCountTestData_Reasons>
+          <PasswordDataGeneratorMinCharacterCountTestData_Reasons>5</PasswordDataGeneratorMinCharacterCountTestData_Reasons>
+          <escapeSpaceSequence/>
+        </con:configuration>
+      </con:dataSource>
+      <con:shared>true</con:shared>
+      <con:restartShared>true</con:restartShared>
+      <con:property>TestData_Reasons</con:property>
+      <con:restartOnRun>true</con:restartOnRun>
+      <con:stopDatasourceExhausted>false</con:stopDatasourceExhausted>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="CreateReason" id="aa68e67a-7112-4ce7-a180-d32cceca8ed1">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="ConfigurationService" resourcePath="/v1/reasons" methodName="createReason" xsi:type="con:RestRequestStep">
+      <con:restRequest name="CreateReason" id="f593120d-31c6-4b97-890e-22c4b7fcd8da" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>http://wes-qa.kpiopto.com:53135/configuration</con:endpoint>
+        <con:request>{
+      "reasonId": 0
+      "type": "Type_${ReasonTestData#TestData_Reasons}",
+      "subType": "SubT_${ReasonTestData#TestData_Reasons}",
+      "reason": "Reason_${ReasonTestData#TestData_Reasons}",
+      "description": "AutomaticInventory_${ReasonTestData#TestData_Reasons}",
+      "isEnabled": true,
+      "defaultReason": true,
+      "created": "${#Global#currentDate}",
+      "createdBy": "${#Global#createdBy}",
+      "modified": "",
+      "modifiedBy": null
+    }</con:request>
+        <con:originalUri>http://wes-qa.kpiopto.com/configuration/v1/reasons</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="803c8119-5944-4208-97cc-4033bee64026" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>400</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="509b683f-93e2-46c0-91d2-ae08a90627fa" name="Response SLA">
+          <con:configuration>
+            <SLA>${#Global#responseTime}</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+        <con:environmentSpec>
+          <con:entry environmentId="a20232c5-d77a-444c-bda6-0af2d2764555">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+          <con:entry environmentId="5b92f166-e4e5-44b8-92cd-0680c6ad2036">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+          <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+          <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+            <con:authProfile>Inherit From Parent</con:authProfile>
+          </con:entry>
+        </con:environmentSpec>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="datasource" name="VerifyAfterCreatedReasonDetails" id="3af165f9-08ab-4f8a-8d4a-d9f90489c987">
+    <con:settings>
+      <con:setting id="com.eviware.soapui.impl.wsdl.teststeps.datasource.DataSourceContainer@prepared-properties">&lt;xml-fragment/></con:setting>
+    </con:settings>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="con:DataSourceStep">
+      <con:dataSource type="JDBC">
+        <con:configuration>
+          <driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+          <connstr>jdbc:sqlserver://20.109.106.76:1433;databaseName=configuration;user=dbuser;password=PASS_VALUE</connstr>
+          <pass>LetDb1n2023!</pass>
+          <Connection/>
+          <query>Select Count(Reason.ReasonId) As id
+From Reason</query>
+          <fetchSize/>
+          <stored-procedure>false</stored-procedure>
+        </con:configuration>
+      </con:dataSource>
+      <con:shared>true</con:shared>
+      <con:restartShared>true</con:restartShared>
+      <con:property>id</con:property>
+      <con:restartOnRun>true</con:restartOnRun>
+      <con:stopDatasourceExhausted>false</con:stopDatasourceExhausted>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="assertionteststep" name="DBCountVeification" id="c9498fd6-9f1c-4250-befa-6c0c11698b9c">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="con:AssertionTestStep">
+      <con:entry>
+        <con:id>0addda1f-303b-4e37-99b3-9248b15805c4</con:id>
+        <con:isGroup>false</con:isGroup>
+        <con:sourceId>e3256996-65c1-40a4-a95c-dcda4e7aa23b</con:sourceId>
+        <con:propertyName>BeforePostCount</con:propertyName>
+        <con:assertion type="Simple Equals" name="VerifyDBCount" id="a5d514d3-33bb-437e-bbe9-060a911abe49">
+          <con:configuration>
+            <patternObjectId>3af165f9-08ab-4f8a-8d4a-d9f90489c987</patternObjectId>
+            <patternProperty>id</patternProperty>
+            <caseSensitive>true</caseSensitive>
+          </con:configuration>
+        </con:assertion>
+      </con:entry>
+    </con:config>
+  </con:testStep>
+  <con:properties/>
+  <con:reportParameters/>
+  <con:environmentSpec>
+    <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+    <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+  </con:environmentSpec>
+</con:testCase>

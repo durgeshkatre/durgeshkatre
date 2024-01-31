@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config" name="/v1/measurement-units/measurementUnitName/{unitName}" path="/v1/measurement-units/measurementUnitName/{unitName}" id="1d876712-d89f-4d7b-b9f3-1c70bb81b66f">
+  <con:settings id="07d62fd3-cd3d-408d-b7fa-096ebc50c4d7">
+    <con:setting id="1d876712-d89f-4d7b-b9f3-1c70bb81b66ffileName">%2Fv1%2Fmeasurement-units%2FmeasurementUnitName%2F%7BunitName%7D</con:setting>
+  </con:settings>
+  <con:parameters/>
+  <con:method name="getMeasurementUnitByUnitName" id="1e10896d-197c-436b-808d-ae6aae07191d" method="GET">
+    <con:description>Returns a single measurement unit</con:description>
+    <con:settings/>
+    <con:parameters>
+      <con:parameter required="true">
+        <con:name>unitName</con:name>
+        <con:style>TEMPLATE</con:style>
+        <con:description>unit name of measurement unit to be searched</con:description>
+      </con:parameter>
+    </con:parameters>
+    <con:representation type="RESPONSE">
+      <con:mediaType>application/json</con:mediaType>
+      <con:status>200</con:status>
+      <con:params/>
+      <con:description>Measurement Unit by unit name</con:description>
+      <con:sampleContent>{
+  "measurementUnitId" : 0,
+  "unitName" : "string",
+  "unitAbbreviation" : "string",
+  "unitSymbol" : "string"
+}</con:sampleContent>
+    </con:representation>
+    <con:representation type="RESPONSE">
+      <con:mediaType>*/*</con:mediaType>
+      <con:status>400</con:status>
+      <con:params/>
+      <con:description>Invalid Request Message</con:description>
+    </con:representation>
+    <con:representation type="RESPONSE">
+      <con:mediaType>*/*</con:mediaType>
+      <con:status>500</con:status>
+      <con:params/>
+      <con:description>Internal Server Error</con:description>
+    </con:representation>
+    <con:request name="Request 1" id="8e42475f-3938-4979-8760-3dd5a8fba322" mediaType="application/json">
+      <con:settings/>
+      <con:endpoint>http://wes-qa.kpiopto.com:53135/configuration</con:endpoint>
+      <con:request/>
+      <con:credentials>
+        <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+      <con:parameters/>
+      <con:environmentSpec>
+        <con:entry environmentId="a20232c5-d77a-444c-bda6-0af2d2764555">
+          <con:authProfile>Inherit From Parent</con:authProfile>
+        </con:entry>
+        <con:entry environmentId="5b92f166-e4e5-44b8-92cd-0680c6ad2036">
+          <con:authProfile>Inherit From Parent</con:authProfile>
+        </con:entry>
+        <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+          <con:authProfile>Inherit From Parent</con:authProfile>
+        </con:entry>
+        <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+          <con:authProfile>Inherit From Parent</con:authProfile>
+        </con:entry>
+      </con:environmentSpec>
+    </con:request>
+    <con:environmentSpec>
+      <con:entry environmentId="a20232c5-d77a-444c-bda6-0af2d2764555">
+        <con:authProfile>Inherit From Parent</con:authProfile>
+      </con:entry>
+      <con:entry environmentId="5b92f166-e4e5-44b8-92cd-0680c6ad2036">
+        <con:authProfile>Inherit From Parent</con:authProfile>
+      </con:entry>
+      <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+        <con:authProfile>Inherit From Parent</con:authProfile>
+      </con:entry>
+      <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+        <con:authProfile>Inherit From Parent</con:authProfile>
+      </con:entry>
+    </con:environmentSpec>
+  </con:method>
+  <con:environmentSpec>
+    <con:entry environmentId="a20232c5-d77a-444c-bda6-0af2d2764555">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+    <con:entry environmentId="5b92f166-e4e5-44b8-92cd-0680c6ad2036">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+    <con:entry environmentId="eb231be2-5c44-4389-89ee-3cea80ff9f03">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+    <con:entry environmentId="a0efce3b-ed50-4171-af5b-af13532b2a89">
+      <con:authProfile>Inherit From Parent</con:authProfile>
+    </con:entry>
+  </con:environmentSpec>
+</con:resource>
